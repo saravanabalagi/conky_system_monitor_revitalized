@@ -1,0 +1,110 @@
+# **********************************************************************
+# "CPU Panel (8-core)" theme for Conky by Tony George (teejee2008@gmail.com)
+#
+# Webpage: http://teejeetech.blogspot.in/
+# **********************************************************************
+
+
+background yes
+double_buffer yes
+
+alignment top_right
+
+border_width 1
+cpu_avg_samples 2
+default_color white
+default_outline_color white
+default_shade_color white
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+
+gap_x 20
+gap_y 40
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+out_to_stderr no
+extra_newline no
+
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_colour 000000
+own_window_argb_visual yes
+own_window_argb_value 0
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+
+minimum_size 170 0
+stippled_borders 0
+update_interval 2.0
+uppercase no
+use_spacer none
+
+show_graph_scale no
+show_graph_range no
+
+use_xft yes
+xftalpha 0.1
+xftfont Droid Sans:size=10
+color0 white
+color1 EAEAEA
+color2 FFA300
+color3 grey
+
+TEXT
+${color2}CPU ${color0}${alignr}${cpu cpu0}%
+${cpubar cpu0 5,}
+${color1}Temperature	$alignr ${color} ${hwmon 0 temp 1}°C
+${color1}Frequency $alignr $freq_g GHz
+
+${top name 1} $alignr ${top cpu 1}%
+${top name 2} $alignr ${top cpu 2}%
+${top name 3} $alignr ${top cpu 3}%
+
+${color2}GPU ${color0} $alignr ${exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
+# ${color2}GPU ${color0} $alignr ${exec nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits} $color
+${execbar exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
+${color1}Temperature ${color}  $alignr ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
+${color1}Frequency ${color}  $alignr ${exec nvidia-smi --query-gpu=clocks.sm --format=csv,noheader}
+${color1}VRAM Utilization ${color} $alignr ${exec nvidia-smi | grep % | cut -c 37-40} MB
+${color1}GPU Power Draw ${color} $alignr ${exec nvidia-smi | grep % | cut -c 21-23} 
+
+${color1}${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n1 --name} $alignr ${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n1 --memory}
+${color1}${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n2 --name} $alignr ${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n2 --memory}
+${color1}${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n3 --name} $alignr ${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n3 --memory}
+# -----------------
+# Using nvidia-smi
+# ${color1}${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 4,4p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*\([/0-9a-zA-Z.=_-]*\)\s*.*/\1/p' | sed "s/.*\///"} $alignr ${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 4,4p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*[/0-9a-zA-Z.=_-]*\s*\([0-9a-zA-Z]*\)\s*.*/\1/p'}
+# ${color1}${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 5,5p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*\([/0-9a-zA-Z.=_-]*\)\s*.*/\1/p' | sed "s/.*\///"} $alignr ${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 5,5p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*[/0-9a-zA-Z.=_-]*\s*\([0-9a-zA-Z]*\)\s*.*/\1/p'}
+# ${color1}${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 6,6p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*\([/0-9a-zA-Z.=_-]*\)\s*.*/\1/p' | sed "s/.*\///"} $alignr ${exec nvidia-smi | sed -n '/Processes/,$p' | sed -n 6,6p | sed -n 's/|\s*[0-9]*\s*[0-9]*\s*[A-Z]*\s*[/0-9a-zA-Z.=_-]*\s*\([0-9a-zA-Z]*\)\s*.*/\1/p'}
+# -------------------
+
+${color2}RAM ${color0}${alignr}${mem}
+${membar 5,}
+${top_mem name 1} $alignr ${top_mem mem_res 1}
+${top_mem name 2} $alignr ${top_mem mem_res 2}
+${top_mem name 3} $alignr ${top_mem mem_res 3}
+${top_mem name 4} $alignr ${top_mem mem_res 4}
+${top_mem name 5} $alignr ${top_mem mem_res 5}
+
+${color2}Swap $alignr ${color0}$swapperc%
+${swapbar 4,}
+${color1}Swap Usage $alignr ${color0}$swap/ $swapmax 
+
+${color2}Temperature
+${color1}SSD	$alignr ${color} ${hddtemp /dev/nvme0n1p1}
+${color1}HDD	$alignr ${color} ${hddtemp /dev/sda | sed "s/.*://"}
+${color1}PCH	$alignr ${color} ${hwmon 1 temp 1}°C
+
+${color2}Disks $alignr ${color0}${fs_used_perc /}%
+${fs_bar /}
+${color1}SSD	$alignr ${color} ${fs_used /} / ${fs_size /}
+${color1}HDD	$alignr ${color} ${fs_used /media/saravanabalagi/DATA} / ${fs_size /media/saravanabalagi/DATA}
+
+${color2}Network
+${color1}Download ${color0}${alignr}${downspeedf eth0} KB/s
+${color1}Upload ${color0}${alignr}${upspeedf eth0} KB/s
+${color1}Local${color0}${alignr}${addrs}
+${color1}Public${color0}${alignr}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
