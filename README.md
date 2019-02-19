@@ -7,15 +7,17 @@ A neat and useful system monitor plugin for Conky.
 The UI Shows the following
 
 - CPU Stats and Programs
-- GPU Stats and Programs*
-- RAM and VRAM
+- GPU<sup>1</sup> Stats and Programs<sup>2</sup>
+- RAM and VRAM<sup>1</sup>
 - Swap Usage
 - Temperature
 - Storage usage
 - Network Speed
 - IP
 
-* works only with Nvidia; requires python script for GPU Processes to be shown
+<sup>1</sup> works only with Nvidia GPUs
+
+<sup>2</sup> requires python script for GPU Processes to be shown
 
 ## Screenshot
 
