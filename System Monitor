@@ -1,7 +1,8 @@
 # **********************************************************************
-# "CPU Panel (8-core)" theme for Conky by Tony George (teejee2008@gmail.com)
-#
-# Webpage: http://teejeetech.blogspot.in/
+# Made by Saravanabalagi with <3
+# github.com/saravanabalagi
+# 
+# Forked from "CPU Panel (8-core)" theme for Conky by Tony George
 # **********************************************************************
 
 
@@ -104,7 +105,7 @@ ${color1}SSD	$alignr ${color} ${fs_used /} / ${fs_size /}
 ${color1}HDD	$alignr ${color} ${fs_used /media/saravanabalagi/DATA} / ${fs_size /media/saravanabalagi/DATA}
 
 ${color2}Network
-${color1}Download ${color0}${alignr}${downspeedf eth0} KB/s
-${color1}Upload ${color0}${alignr}${upspeedf eth0} KB/s
-${color1}Local${color0}${alignr}${addrs}
+${color1}Download ${color0}${alignr}${downspeedf enp6s0} KB/s
+${color1}Upload ${color0}${alignr}${upspeedf enp6s0} KB/s
+${color1}Local${color0}${alignr}${addr enp6s0}
 ${color1}Public${color0}${alignr}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
