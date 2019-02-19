@@ -107,5 +107,7 @@ ${color1}HDD	$alignr ${color} ${fs_used /media/saravanabalagi/DATA} / ${fs_size 
 ${color2}Network
 ${color1}Download ${color0}${alignr}${downspeedf enp6s0} KB/s
 ${color1}Upload ${color0}${alignr}${upspeedf enp6s0} KB/s
+${color1}Downloaded $alignr${totaldown enp6s0}
+${color1}Uploaded $alignr${totalup enp6s0}
 ${color1}Local${color0}${alignr}${addr enp6s0}
 ${color1}Public${color0}${alignr}${execi 3600 wget -q -O /dev/stdout http://checkip.dyndns.org/ | cut -d : -f 2- | cut -d \< -f -1}
