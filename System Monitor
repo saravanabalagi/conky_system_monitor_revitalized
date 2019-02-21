@@ -105,8 +105,8 @@ ${color1}SSD	$alignr ${color} ${fs_used /} / ${fs_size /}
 ${color1}HDD	$alignr ${color} ${fs_used /media/saravanabalagi/DATA} / ${fs_size /media/saravanabalagi/DATA}
 
 ${color2}Network
-${color1}Download ${color0}${alignr}${downspeedf enp6s0} KB/s
-${color1}Upload ${color0}${alignr}${upspeedf enp6s0} KB/s
+${color1}Download ${color0}${alignr}${downspeed enp6s0}
+${color1}Upload ${color0}${alignr}${upspeed enp6s0}
 ${color1}Downloaded $alignr${totaldown enp6s0}
 ${color1}Uploaded $alignr${totalup enp6s0}
 ${color1}Local${color0}${alignr}${addr enp6s0}
