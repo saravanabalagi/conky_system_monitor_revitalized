@@ -69,8 +69,8 @@ ${color2}GPU ${color0} $alignr ${exec nvidia-smi --query-gpu=utilization.gpu --f
 ${execbar exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
 ${color1}Temperature ${color}  $alignr ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
 ${color1}Frequency ${color}  $alignr ${exec nvidia-smi --query-gpu=clocks.sm --format=csv,noheader}
-${color1}VRAM Utilization ${color} $alignr ${exec nvidia-smi | grep % | cut -c 36-40} MB
-${color1}GPU Power Draw ${color} $alignr ${exec nvidia-smi | grep % | cut -c 21-23} 
+${color1}VRAM Utilization ${color} $alignr ${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader}
+${color1}GPU Power Draw ${color} $alignr ${exec nvidia-smi --query-gpu=power.draw --format=csv,noheader} 
 
 ${color1}${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n1 --name} $alignr ${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n1 --memory}
 ${color1}${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n2 --name} $alignr ${exec python3 /home/$(whoami)/.conky/saravanabalagi/query_gpu_processes.py -n2 --memory}
