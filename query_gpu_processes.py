@@ -2,6 +2,7 @@ import subprocess
 import xmltodict
 import argparse
 import sys
+import re
 
 parser = argparse.ArgumentParser(description='Get GPU process info')
 parser.add_argument("-n", type=int, default=1,
@@ -16,6 +17,7 @@ output = subprocess.check_output(['nvidia-smi', '-q','-x']).decode()
 parsed = xmltodict.parse(output)
 
 processes = parsed['nvidia_smi_log']['gpu']['processes']['process_info']
+processes = sorted(processes, key=lambda process: int(re.sub(r'[^\d-]+', '', process['used_memory'])), reverse=True)
 totalProcesses = len(processes)
 
 if args.n > totalProcesses:
