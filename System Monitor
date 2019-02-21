@@ -97,8 +97,8 @@ ${swapbar 4,}
 ${color1}Swap Usage $alignr ${color0}$swap/ $swapmax 
 
 ${color2}Temperature
-${color1}SSD	$alignr ${color} ${hddtemp /dev/nvme0n1p1}
-${color1}HDD	$alignr ${color} ${hddtemp /dev/sda | sed "s/.*://"}
+${color1}SSD	$alignr ${color} ${exec smartctl -a /dev/nvme0 | grep Temperature | sed -n 1p | sed -n 's/[A-Za-z: ]*\([0-9]*\) [A-Za-z]*/\1/p'}°C
+${color1}HDD	$alignr ${color} ${exec hddtemp /dev/sda | sed "s/.*://"}
 ${color1}PCH	$alignr ${color} ${hwmon 1 temp 1}°C
 
 ${color2}Disks $alignr ${color0}${fs_used_perc /}%
