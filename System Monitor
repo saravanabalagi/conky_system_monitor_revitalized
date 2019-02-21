@@ -57,7 +57,6 @@ color3 grey
 TEXT
 ${color2}CPU ${color0}${alignr}${cpu cpu0}%
 ${cpubar cpu0 5,}
-${color1}Temperature	$alignr ${color} ${hwmon 0 temp 1}°C
 ${color1}Frequency $alignr $freq_g GHz
 
 ${top name 1} $alignr ${top cpu 1}%
@@ -67,9 +66,8 @@ ${top name 3} $alignr ${top cpu 3}%
 ${color2}GPU ${color0} $alignr ${exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
 # ${color2}GPU ${color0} $alignr ${exec nvidia-smi --query-gpu=gpu_name --format=csv,noheader,nounits} $color
 ${execbar exec nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader}
-${color1}Temperature ${color}  $alignr ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader} °C
 ${color1}Frequency ${color}  $alignr ${exec nvidia-smi --query-gpu=clocks.sm --format=csv,noheader}
-${color1}GPU Power Draw ${color} $alignr ${exec nvidia-smi --query-gpu=power.draw --format=csv,noheader} 
+${color1}Power Draw ${color} $alignr ${exec nvidia-smi --query-gpu=power.draw --format=csv,noheader} 
 ${color1}Fan Speed ${color} $alignr ${exec nvidia-smi --query-gpu=fan.speed --format=csv,noheader} 
 
 ${color2}VRAM ${color0} $alignr ${exec nvidia-smi --query-gpu=memory.used --format=csv,noheader}
@@ -96,15 +94,17 @@ ${color2}Swap $alignr ${color0}$swapperc%
 ${swapbar 4,}
 ${color1}Swap Usage $alignr ${color0}$swap/ $swapmax 
 
-${color2}Temperature
-${color1}SSD	$alignr ${color} ${exec smartctl -a /dev/nvme0 | grep Temperature | sed -n 1p | sed -n 's/[A-Za-z: ]*\([0-9]*\) [A-Za-z]*/\1/p'}°C
-${color1}HDD	$alignr ${color} ${exec hddtemp /dev/sda | sed "s/.*://"}
-${color1}PCH	$alignr ${color} ${hwmon 1 temp 1}°C
-
 ${color2}Disks $alignr ${color0}${fs_used_perc /}%
 ${fs_bar /}
 ${color1}SSD	$alignr ${color} ${fs_used /} / ${fs_size /}
 ${color1}HDD	$alignr ${color} ${fs_used /media/saravanabalagi/DATA} / ${fs_size /media/saravanabalagi/DATA}
+
+${color2}Temperature
+${color1}CPU	$alignr ${color} ${hwmon 0 temp 1}°C
+${color1}GPU ${color}  $alignr ${exec nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader}°C
+${color1}SSD	$alignr ${color} ${exec smartctl -a /dev/nvme0 | grep Temperature | sed -n 1p | sed -n 's/[A-Za-z: ]*\([0-9]*\) [A-Za-z]*/\1/p'}°C
+${color1}HDD	$alignr ${color} ${exec hddtemp /dev/sda | sed "s/.*://"}
+${color1}PCH	$alignr ${color} ${hwmon 1 temp 1}°C
 
 ${color2}Network
 ${color1}Download ${color0}${alignr}${downspeed enp6s0}
