@@ -10,14 +10,18 @@ The UI Shows the following
 - GPU<sup>1</sup> Stats and Programs<sup>2</sup>
 - RAM and VRAM<sup>1</sup>
 - Swap Usage
-- Temperature
+- Temperature<sup>3</sup>
 - Storage usage
 - Network Speed
 - IP
 
-<sup>1</sup> works only with Nvidia GPUs
+## Dependecies
 
-<sup>2</sup> requires python script for GPU Processes to be shown
+1. **nvidia-smi**: Works only with Nvidia GPUs.
+
+2. **python**: Requires running python script for GPU Processes to be shown. (Bundled in the repo)
+
+3. **hddtemp** must be installed and configured to be run as a service: In `/etc/default/hddtemp` make sure `RUN_DAEMON="true"` is present.
 
 ## Screenshot
 
